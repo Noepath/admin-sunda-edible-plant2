@@ -15,6 +15,11 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 
 // Protected routes
 Route::middleware('auth.session')->group(function () {
+    
+    Route::get('/categories', function () {
+        return view('categories.index');
+    })->name('categories.index');
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     //     }
@@ -55,7 +60,7 @@ Route::middleware('auth.session')->group(function () {
             'token' => session('firebase_token'),
             'email' => session('email'),
             'admin_registered' => session('admin_registered', false),
-            'api_status' => session('api_status', 'unknown')
+            'api_status' => session('api_status', 'unknown'),
         ];
 
         return view('plants.index', $data);
@@ -71,7 +76,7 @@ Route::middleware('auth.session')->group(function () {
             'token' => session('firebase_token'),
             'email' => session('email'),
             'admin_registered' => session('admin_registered', false),
-            'api_status' => session('api_status', 'unknown')
+            'api_status' => session('api_status', 'unknown'),
         ];
 
         return view('plants.create', $data);
@@ -98,7 +103,7 @@ Route::middleware('auth.session')->group(function () {
             'token' => session('firebase_token'),
             'email' => session('email'),
             'admin_registered' => session('admin_registered', false),
-            'api_status' => session('api_status', 'unknown')
+            'api_status' => session('api_status', 'unknown'),
         ];
 
         return view('diseases.index', $data);
@@ -115,7 +120,7 @@ Route::middleware('auth.session')->group(function () {
             'token' => session('firebase_token'),
             'email' => session('email'),
             'admin_registered' => session('admin_registered', false),
-            'api_status' => session('api_status', 'unknown')
+            'api_status' => session('api_status', 'unknown'),
         ];
 
         return view('users.index', $data);

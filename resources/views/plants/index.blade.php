@@ -34,7 +34,7 @@
         </div>
 
         <!-- Kategori Card -->
-        <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg p-6 text-white shadow-lg relative overflow-hidden" style="background: linear-gradient(135deg, #6C5CE7 0%, #A855F7 100%);">
+        <a href="{{ route('categories.index') }}" class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg p-6 text-white shadow-lg relative overflow-hidden cursor-pointer hover:shadow-xl transition-shadow">
             <div class="flex items-center justify-between">
                 <div class="flex-1">
                     <p class="text-2xl font-bold mb-1" id="categoriesCount">0</p>
@@ -44,7 +44,7 @@
                     <img src="{{ asset('icons/section2.svg') }}" alt="Category Icon" class="w-16 h-16">
                 </div>
             </div>
-        </div>
+        </a>
 
         <!-- Tambah Tanaman Card -->
         <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg p-6 text-white shadow-lg relative overflow-hidden cursor-pointer hover:shadow-xl transition-shadow" onclick="showAddPlantModal()">
@@ -78,7 +78,7 @@
                     </svg>
                     Tambah Tanaman
                 </a>
-                
+
                 <!-- Category Filter -->
                 <select id="categoryFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" onchange="filterPlantsByCategory(this.value)">
                     <option value="">Semua Kategori</option>

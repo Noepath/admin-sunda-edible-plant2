@@ -52,6 +52,31 @@ window.api = {
         }
     },
 
+    // Generic POST request
+    async post(endpoint, body, isFormData = false) {
+        const token = this.getToken();
+        if (!token) {
+            console.error('No token available for API POST request');
+            alert('Session expired or not logged in. Please login again.');
+            return null;
+        }
+        let options = {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json'
+            }
+        };
+        if (isFormData) {
+            options.body = body;
+            // Do NOT set Content-Type for FormData, browser will handle it
+        } else {
+            options.body = JSON.stringify(body);
+            options.headers['Content-Type'] = 'application/json';
+        }
+        return this.fetch(endpoint, options);
+    },
+
     // Get plants data (same logic as dashboard)
     async getPlants() {
         try {
@@ -117,6 +142,20 @@ window.api = {
         }
     },
 
+    // Create a new plant category
+    async createPlantCategory(formData) {
+        try {
+            console.log('Creating new plant category...');
+            // The third argument `true` indicates that we are sending FormData
+            const response = await this.post('/plant-categories', formData, true);
+            console.log('Create category response:', response);
+            return response;
+        } catch (error) {
+            console.error('Error creating plant category:', error);
+            return null;
+        }
+    },
+
     // Get diseases data
     async getDiseases() {
         try {
@@ -176,11 +215,19 @@ window.api = {
     },
 
     getMockCategories() {
-        return [
-            { id: 1, name: 'Sayuran', description: 'Tanaman sayuran' },
-            { id: 2, name: 'Herbal', description: 'Tanaman herbal' },
-            { id: 3, name: 'Buah', description: 'Tanaman buah' },
-            { id: 4, name: 'Rempah', description: 'Tanaman rempah' }
+        console.log('Using mock categories data');
+        return [{
+                id: 1,
+                nama_kategori: 'Tanaman Umum (Mock)'
+            },
+            {
+                id: 2,
+                nama_kategori: 'Tanaman Pangan (Mock)'
+            },
+            {
+                id: 3,
+                nama_kategori: 'Tanaman Buah (Mock)'
+            },
         ];
     },
 
